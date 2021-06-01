@@ -62,6 +62,7 @@ get_header();
             <img src="" alt="" class="billede">
             <h3 class="navn">
             </h3>
+            <button>Detaljer</button>
         </article>
     </template>
 </section>
