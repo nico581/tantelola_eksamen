@@ -89,6 +89,8 @@ get_header();
         let kreaprojekt;
         let aktuelKreaprojekt = <?php echo get_the_ID() ?>;
 
+        const kreakatalog = "http://nicolinechristiansen.dk/kea/tantelola/wordpress/kreakatalog/";
+
         const dbUrl = "https://nicolinechristiansen.dk/kea/tantelola/wordpress/wp-json/wp/v2/kreaprojekt/" + aktuelKreaprojekt;
 
         const container = document.querySelector("#kreaprojekt");
@@ -106,7 +108,7 @@ get_header();
             document.querySelector(".billede").src = kreaprojekt.billede.guid;
             document.querySelector(".beskrivelse").innerHTML = kreaprojekt.beskrivelse;
             document.querySelector(".knap button").addEventListener("click", () => {
-                location.href = kreakatalog.link;
+                location.href = kreakatalog;
             })
         }
 
