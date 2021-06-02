@@ -14,25 +14,73 @@ get_header();
 
 
 <style>
-    #primary {
+    #kreaprojekt {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin: 5rem auto;
+        gap: 2rem;
+    }
+
+    .navn {
+        font-size: 26px;
+        font-weight: 700;
+    }
+
+    .tekst {
         display: flex;
         flex-direction: column;
+        align-self: center;
+    }
+
+    .billede {
+        width: 400px;
+        height: auto;
+    }
+
+    .knap {
+        align-self: center;
+        margin-top: 2rem;
+    }
+
+    .knap button {
+        height: 2rem;
+        width: 15rem;
+        align-self: center;
+        background-color: #E0E8EE;
+        border: none;
+        border-radius: 20px;
+    }
+
+    .knap button:hover {
+        cursor: pointer;
+        background-color: #F2E7FA;
     }
 
 </style>
 
-
+<section id="top">
+    <div class="regnbue_divider">
+        <img src="/kea/tantelola/wordpress/wp-content/themes/child/img/regnbue_streg.png" alt="regnbue_divider" class="regnbue">
+    </div>
+</section>
 <section id="primary" class="content-area">
     <main id="main" class="site-main">
         <article id="kreaprojekt">
             <div class="kreaprojekt-billede">
                 <img class="billede" src="" alt="">
             </div>
+
             <div class="tekst">
-                <h2 class="navn">
-                </h2>
+                <h1 class="navn">
+                </h1>
                 <p class="beskrivelse"></p>
+                <div class="knap">
+                    <button>Tilbage til kreakatalog</button>
+                </div>
+
             </div>
+
         </article>
 
     </main>
@@ -56,7 +104,10 @@ get_header();
             console.log("hej med dig", kreaprojekt);
             document.querySelector(".navn").textContent = kreaprojekt.title.rendered;
             document.querySelector(".billede").src = kreaprojekt.billede.guid;
-            document.querySelector(".beskrivelse").textContent = kreaprojekt.beskrivelse;
+            document.querySelector(".beskrivelse").innerHTML = kreaprojekt.beskrivelse;
+            document.querySelector(".knap button").addEventListener("click", () => {
+                location.href = kreakatalog.link;
+            })
         }
 
 
@@ -67,6 +118,11 @@ get_header();
 
     </script>
 
+</section>
+<section id="bund">
+    <div class="regnbue_divider">
+        <img src="/kea/tantelola/wordpress/wp-content/themes/child/img/regnbue_streg.png" alt="regnbue_divider" class="regnbue">
+    </div>
 </section>
 
 <?php
