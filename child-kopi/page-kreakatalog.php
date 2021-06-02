@@ -3,6 +3,7 @@ get_header();
 ?>
 
 <style>
+    /* Toppen af dom */
     #top {
         text-align: center;
         height: 120px;
@@ -10,11 +11,60 @@ get_header();
         padding-bottom: 50px;
     }
 
+    .regnbue {
+        position: relative;
+        top: -3.1rem;
+
+    }
+
+    /* #top .top_tekst {
+        display: flex;
+        flex-direction: row;
+        margin-left: 8rem;
+        gap: 2rem;
+    }
+*/
+    #top .overskrift {
+        font-size: 26px;
+        font-weight: 700;
+    }
+
+    /* Sitebar med titel og buttons */
+    #indhold_sidebar {
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+    }
+
+    #indhold_sidebar .sitebar .tekst .underoverskrift {
+        font-size: 16px;
+        color: #a46497;
+    }
+
+    .sitebar {
+        display: block;
+        padding-left: 8.5rem;
+    }
+
+    #filtrering .filter {
+        display: block;
+        border: none;
+        background-color: transparent;
+        font-size: 16px;
+        margin-top: 1rem;
+    }
+
+
+    /* Oversigten over projekter */
+
+    #primary {
+        margin-top: 10rem;
+    }
+
     #kreaprojekt-oversigt {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        margin-left: 5rem;
         margin-right: 5rem;
+        margin-left: 2rem;
         grid-gap: 2rem;
     }
 
@@ -23,36 +73,20 @@ get_header();
     }
 
     .kreaprojekt {
-        background: grey;
-    }
-
-    #filtrering {
-        text-align: center;
-    }
-
-    #filtrering .filter {
-        padding: 1rem;
-        width: 20vw;
-        margin: 2rem;
-        background-color: #E0E8EE;
-        border: none;
-    }
-
-    #filtrering .filter:hover {
-        background-color: #F2E7FA;
-    }
-
-    #filtrering .filter:active {
-        background-color: #F2E7FA;
+        background: white;
     }
 
 </style>
 <section id="top">
     <div class="regnbue_divider">
-        <img src="" alt="">
+        <img src="/kea/tantelola/wordpress/wp-content/themes/child/img/regnbue_streg.png" alt="regnbue_divider" class="regnbue">
     </div>
-    <div class="tekst">
-        <h2>Kreakatalog</h2>
+    <div class="top_tekst">
+        <h1 class="overskrift">Kreakatalog</h1>
+        <div class="paragraph">
+            <p> Mangler I en hyggelig familieaktivitet, eller får du børnebørnene på besøg i weekenden?</p>
+            <p>Så kan du her se vores udvalg af kreaprojekter, som du kan kreerer i caféen eller tage med hjem to-go.</p>
+        </div>
     </div>
 </section>
 
@@ -60,9 +94,11 @@ get_header();
     <template>
         <article class="kreaprojekt">
             <img src="" alt="" class="billede">
-            <h3 class="navn">
-            </h3>
-            <button>Detaljer</button>
+            <div class="info">
+                <h3 class="navn">
+                </h3>
+                <p class="pris"></p>
+            </div>
         </article>
     </template>
 </section>
@@ -70,8 +106,17 @@ get_header();
 <section id="primary" class="content-area">
 
     <main id="main" class="site-main">
-        <nav id="filtrering"></nav>
-        <section id="kreaprojekt-oversigt"> </section>
+        <section id="indhold_sidebar">
+            <div class="sitebar">
+                <div class="tekst">
+                    <h2 class="underoverskrift">Prisklasse</h2>
+                </div>
+                <nav id="filtrering"></nav>
+            </div>
+            <section id="kreaprojekt-oversigt">
+            </section>
+        </section>
+
     </main>
 
     <script>
@@ -126,9 +171,10 @@ get_header();
                 if (filterKreaprojekt == "alle" || kreaprojekt.categories.includes(parseInt(filterKreaprojekt))) {
                     let klon = temp.cloneNode(true).content;
                     klon.querySelector(".navn").textContent = kreaprojekt.title.rendered;
+                    klon.querySelector(".pris").textContent = kreaprojekt.pris;
                     klon.querySelector(".billede").src = kreaprojekt.billede.guid;
                     klon.querySelector("article").addEventListener("click", () => {
-                        Runner.displayPopup = kreaprojekt.link;
+                        location.href = kreaprojekt.link;
                     })
                     container.appendChild(klon);
                 }
