@@ -29,6 +29,10 @@ get_header();
         font-weight: 700;
     }
 
+    #top .paragraph {
+        font-weight: 400;
+    }
+
     /* Sitebar med titel og buttons */
     #indhold_sidebar {
         display: grid;
