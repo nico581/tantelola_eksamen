@@ -11,19 +11,17 @@ get_header();
         padding-bottom: 50px;
     }
 
-    .regnbue {
+    #top .regnbue {
         position: relative;
         top: -3.1rem;
 
     }
 
-    /* #top .top_tekst {
-        display: flex;
-        flex-direction: row;
-        margin-left: 8rem;
-        gap: 2rem;
+    #top .top_tekst {
+        margin: 0 auto;
+        padding: 1rem;
     }
-*/
+
     #top .overskrift {
         font-size: 26px;
         font-weight: 700;
@@ -35,49 +33,116 @@ get_header();
 
     /* Sitebar med titel og buttons */
     #indhold_sidebar {
-        display: grid;
-        grid-template-columns: 1fr 3fr;
+        display: flex;
+        flex-direction: column;
+        margin-top: 15rem;
     }
 
     #indhold_sidebar .sitebar .tekst .underoverskrift {
-        font-size: 16px;
-        color: #a46497;
+        font-size: 18px;
+        /*color: #a46497;*/
     }
 
     .sitebar {
         display: block;
-        padding-left: 8.5rem;
+        align-self: center;
+        padding: 1rem;
+
     }
 
     #filtrering .filter {
-        display: block;
+        /*display: block;*/
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         border: none;
         background-color: transparent;
         font-size: 16px;
+        font-weight: 500;
         margin-top: 1rem;
+    }
+
+    #filtrering .filter:hover {
+        cursor: pointer;
+        color: #a46497;
+        font-weight: 600;
+
+    }
+
+    #filtrering .filter:focus {
+        color: #a46497;
+        font-weight: 600;
+
     }
 
 
     /* Oversigten over projekter */
 
-    #primary {
-        margin-top: 10rem;
-    }
-
     #kreaprojekt-oversigt {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        margin-right: 5rem;
-        margin-left: 2rem;
+        margin: 0 1rem;
         grid-gap: 2rem;
+        align-self: center;
     }
 
     #kreaprojekt-oversigt h3 {
-        font-size: 1.5rem;
+        font-size: 16px;
+        text-align: center;
     }
 
     .kreaprojekt {
-        background: white;
+        background: rgb(255, 255, 255, 60);
+        border-bottom-right-radius: 20px;
+        border-bottom-left-radius: 20px;
+    }
+
+    .kreaprojekt .info {
+        display: flex;
+        flex-direction: column;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    .info_knap {
+        height: 2rem;
+        width: 5rem;
+        align-self: center;
+        background-color: #E0E8EE;
+        border: none;
+        border-radius: 20px;
+    }
+
+    .info_knap:hover {
+        cursor: pointer;
+        background-color: #F2E7FA;
+    }
+
+    @media (min-width: 600px) {
+        #indhold_sidebar {
+            flex-direction: row;
+            margin-top: auto;
+        }
+
+        #primary {
+            margin-top: 10rem;
+            margin-bottom: 5rem;
+        }
+
+        #kreaprojekt-oversigt {
+            margin: 0 auto;
+        }
+
+        .sitebar {
+            height: 16.5vw;
+            align-self: flex-start;
+            border-right: 0.5px solid lightgrey;
+            padding-left: 8.5rem;
+            padding-right: 7rem;
+        }
+
+
+
     }
 
 </style>
@@ -101,7 +166,8 @@ get_header();
             <div class="info">
                 <h3 class="navn">
                 </h3>
-                <p class="pris"></p>
+                <button class="info_knap">Info</button>
+                <!--<p class="pris"></p>-->
             </div>
         </article>
     </template>
@@ -124,6 +190,7 @@ get_header();
     </main>
 
     <script>
+        //Variabler//
         let kreaprojekt;
         let categories;
         let filterKreaprojekt = "alle";
@@ -132,6 +199,7 @@ get_header();
         const catUrl = "https://nicolinechristiansen.dk/kea/tantelola/wordpress/wp-json/wp/v2/categories";
 
 
+        //Henter content fra Pods & opretter knapper //
         async function getJson() {
             let data = await fetch(url);
             let catdata = await fetch(catUrl);
@@ -142,6 +210,7 @@ get_header();
             opretKnapper();
         }
 
+        // Funktion der opretter kategori knapper i html //
         function opretKnapper() {
             categories.forEach(cat => {
                 document.querySelector("#filtrering").innerHTML += `<button class="filter" data-kreaprojekt="${cat.id}">${cat.name}</button>`
@@ -151,6 +220,7 @@ get_header();
 
         }
 
+        //Tilføjer eventlistener til knapperne, som gør at kreaprojekterne bliver filtreret efter kategori //
         function addEventListenerToButtons() {
             document.querySelectorAll("#filtrering button").forEach(elm => {
                 elm.addEventListener("click", filtrering);
@@ -165,6 +235,8 @@ get_header();
 
         }
 
+        //Funktion som placere information fra pods i de respektive tags som er tilføjet til oversigten //
+
         function visKreaprojekter() {
 
             console.log(kreaprojekter);
@@ -175,9 +247,9 @@ get_header();
                 if (filterKreaprojekt == "alle" || kreaprojekt.categories.includes(parseInt(filterKreaprojekt))) {
                     let klon = temp.cloneNode(true).content;
                     klon.querySelector(".navn").textContent = kreaprojekt.title.rendered;
-                    klon.querySelector(".pris").textContent = kreaprojekt.pris;
+                    //klon.querySelector(".pris").textContent = kreaprojekt.pris;//
                     klon.querySelector(".billede").src = kreaprojekt.billede.guid;
-                    klon.querySelector("article").addEventListener("click", () => {
+                    klon.querySelector(".info_knap").addEventListener("click", () => {
                         location.href = kreaprojekt.link;
                     })
                     container.appendChild(klon);
@@ -189,6 +261,12 @@ get_header();
         getJson();
 
     </script>
+</section>
+
+<section id="bund">
+    <div class="regnbue_divider">
+        <img src="/kea/tantelola/wordpress/wp-content/themes/child/img/regnbue_streg.png" alt="regnbue_divider" class="regnbue">
+    </div>
 </section>
 
 
