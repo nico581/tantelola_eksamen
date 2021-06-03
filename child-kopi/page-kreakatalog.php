@@ -12,8 +12,9 @@ get_header();
     }
 
     #top .regnbue {
-        position: relative;
-        top: -3.1rem;
+        position: absolute;
+        margin-top: -3.1rem;
+        left: 0rem;
 
     }
 
@@ -118,6 +119,63 @@ get_header();
         background-color: #F2E7FA;
     }
 
+    /* Single view */
+
+
+    #singleView {
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        /*text-align: center;*/
+    }
+
+
+    #single-content {
+        display: flex;
+        flex-direction: row;
+        width: 80vw;
+        background-color: rgb(255, 255, 255, 95%);
+        margin: auto;
+        border-radius: 20px;
+    }
+
+    #singleView.vis {
+        display: block;
+    }
+
+    #singleView.forsvind {
+        displaY: none;
+    }
+
+    .kreaprojekt-billede {
+        padding: 2rem;
+
+    }
+
+    .single-billede {
+        align-self: center;
+        max-width: 500px;
+    }
+
+    .kreaprojekt-infotekst {
+        align-self: center;
+    }
+
+    .single-knap {
+        height: 3rem;
+        width: 12rem;
+        margin-top: 1rem;
+        margin-right: 1rem;
+        background-color: #E0E8EE;
+        border: none;
+        border-radius: 20px;
+    }
+
+    .single-knap:hover {
+        cursor: pointer;
+        background-color: #F2E7FA;
+    }
+
     @media (min-width: 600px) {
         #indhold_sidebar {
             flex-direction: row;
@@ -146,6 +204,22 @@ get_header();
     }
 
 </style>
+
+<section id="singleView">
+    <div id="single-content">
+        <div class="kreaprojekt-billede">
+            <img class="single-billede" src="/kea/tantelola/wordpress/wp-content/themes/child/img/placeholder.png" alt="placeholder">
+        </div>
+        <div class="kreaprojekt-infotekst">
+            <h1 class="single-navn">Titel</h1>
+            <h2 class="single-pris">Pris</h2>
+            <p class="single-beskrivelse">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde, suscipit atque provident assumenda optio voluptatum illo, deleniti praesentium eaque eligendi magni aspernatur ex numquam iusto. Quaerat porro accusamus eligendi voluptatum saepe iste. Eaque ut consectetur voluptatibus, ad molestias vel totam pariatur aliquid suscipit error fugiat libero animi vero laborum accusantium.</p>
+
+        </div>
+        <button class="single-knap">X</button>
+    </div>
+</section>
+
 <section id="top">
     <div class="regnbue_divider">
         <img src="/kea/tantelola/wordpress/wp-content/themes/child/img/regnbue_streg.png" alt="regnbue_divider" class="regnbue">
@@ -158,6 +232,8 @@ get_header();
         </div>
     </div>
 </section>
+
+
 
 <section id="liste">
     <template>
@@ -189,11 +265,20 @@ get_header();
 
     </main>
 
+</section>
+
+<section id="bund">
+    <div class="regnbue_divider">
+        <img src="/kea/tantelola/wordpress/wp-content/themes/child/img/regnbue_streg.png" alt="regnbue_divider" class="regnbue">
+    </div>
     <script>
         //Variabler//
         let kreaprojekt;
         let categories;
         let filterKreaprojekt = "alle";
+        let mySingle = document.querySelector("#singleView");
+
+        mySingle.classList.add("forsvind");
 
         const url = "https://nicolinechristiansen.dk/kea/tantelola/wordpress/wp-json/wp/v2/kreaprojekt?per_page=100";
         const catUrl = "https://nicolinechristiansen.dk/kea/tantelola/wordpress/wp-json/wp/v2/categories";
@@ -249,8 +334,9 @@ get_header();
                     klon.querySelector(".navn").textContent = kreaprojekt.title.rendered;
                     //klon.querySelector(".pris").textContent = kreaprojekt.pris;//
                     klon.querySelector(".billede").src = kreaprojekt.billede.guid;
+                    //klon.querySelector(".info_knap").addEventListener("click", () => { location.href = kreaprojekt.link;})
                     klon.querySelector(".info_knap").addEventListener("click", () => {
-                        location.href = kreaprojekt.link;
+                        visSingle();
                     })
                     container.appendChild(klon);
                 }
@@ -258,15 +344,42 @@ get_header();
             })
         }
 
+        //Skal nok ikke bruges, men bliver brugt i single-kreaprojekt??
+
+        //let aktuelKreaprojekt = <?php echo get_the_ID() ?>;
+        //const dbUrl = "https://nicolinechristiansen.dk/kea/tantelola/wordpress/wp-json/wp/v2/kreaprojekt/" + aktuelKreaprojekt;
+        //async function getSingle() {
+        //const data = await fetch(dbUrl);
+        //kreaprojekt = await data.json();
+
+        //visSingle();
+        //}
+
+        //Funktion der skal vise specifik info omkring et kreaprojekt
+        function visSingle() {
+            mySingle.classList.remove("forsvind");
+            mySingle.classList.add("vis");
+            console.log("Jeg har tilføjet display block");
+            //mySingle.querySelector(".single-navn").textContent = kreaprojekt.title.rendered;
+            //mySingle.querySelector(".single-billede").src = kreaprojekt.billede.guid;
+            //mySingle.querySelector(".single-beskrivelse").innerHTML = kreaprojekt.beskrivelse;
+            //mySingle.querySelector(".single-pris").textContent = kreaprojekt.pris;
+            //console.log("Jeg viser single view");
+            mySingle.querySelector("#singleView button").addEventListener("click", lukSingle);
+            console.log("Jeg lukker single view");
+
+        }
+
+        //Funktion som lukker den specifikke info om kreaprojekt
+        function lukSingle() {
+            mySingle.classList.remove("vis");
+            mySingle.classList.add("forsvind");
+
+        }
+
         getJson();
 
     </script>
-</section>
-
-<section id="bund">
-    <div class="regnbue_divider">
-        <img src="/kea/tantelola/wordpress/wp-content/themes/child/img/regnbue_streg.png" alt="regnbue_divider" class="regnbue">
-    </div>
 </section>
 
 

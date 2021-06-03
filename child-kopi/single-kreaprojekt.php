@@ -74,6 +74,7 @@ get_header();
             <div class="tekst">
                 <h1 class="navn">
                 </h1>
+                <h2 class="pris"></h2>
                 <p class="beskrivelse"></p>
                 <div class="knap">
                     <button>Tilbage til kreakatalog</button>
@@ -107,6 +108,7 @@ get_header();
             document.querySelector(".navn").textContent = kreaprojekt.title.rendered;
             document.querySelector(".billede").src = kreaprojekt.billede.guid;
             document.querySelector(".beskrivelse").innerHTML = kreaprojekt.beskrivelse;
+            document.querySelector(".pris").textContent = kreaprojekt.pris;
             document.querySelector(".knap button").addEventListener("click", () => {
                 location.href = kreakatalog;
             })
