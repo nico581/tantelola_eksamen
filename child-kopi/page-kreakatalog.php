@@ -75,12 +75,14 @@ get_header();
         cursor: pointer;
         font-weight: 600;
         transform: scale(1.08);
+        color: #FFB583;
         background-color: #E0E8EE;
 
     }
 
     #filtrering .filter:focus {
         font-weight: 600;
+        color: #FFB583;
         background-color: #E0E8EE;
 
     }
