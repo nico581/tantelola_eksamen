@@ -96,6 +96,7 @@ get_header();
         background: rgb(255, 255, 255, 60);
         border-bottom-right-radius: 20px;
         border-bottom-left-radius: 20px;
+
     }
 
     .kreaprojekt .info {
@@ -112,6 +113,8 @@ get_header();
         background-color: #E0E8EE;
         border: none;
         border-radius: 20px;
+        box-shadow: rgba(0, 0, 0, 0.3) 0px 12px 18px -6px;
+
     }
 
     .info_knap:hover {
@@ -137,6 +140,7 @@ get_header();
         background-color: rgb(255, 255, 255, 95%);
         margin: auto;
         border-radius: 20px;
+        box-shadow: rgba(0 0 0 / 30%) -5px 20px 22px 0px;
     }
 
     #singleView.vis {
@@ -169,6 +173,7 @@ get_header();
         background-color: #E0E8EE;
         border: none;
         border-radius: 20px;
+        box-shadow: rgba(0, 0, 0, 0.3) 0px 12px 18px -6px;
     }
 
     .single-knap:hover {
@@ -208,12 +213,12 @@ get_header();
 <section id="singleView">
     <div id="single-content">
         <div class="kreaprojekt-billede">
-            <img class="single-billede" src="/kea/tantelola/wordpress/wp-content/themes/child/img/placeholder.png" alt="placeholder">
+            <img class="single-billede" src="" alt="">
         </div>
         <div class="kreaprojekt-infotekst">
-            <h1 class="single-navn">Titel</h1>
-            <h2 class="single-pris">Pris</h2>
-            <p class="single-beskrivelse">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde, suscipit atque provident assumenda optio voluptatum illo, deleniti praesentium eaque eligendi magni aspernatur ex numquam iusto. Quaerat porro accusamus eligendi voluptatum saepe iste. Eaque ut consectetur voluptatibus, ad molestias vel totam pariatur aliquid suscipit error fugiat libero animi vero laborum accusantium.</p>
+            <h1 class="single-navn"></h1>
+            <h2 class="single-pris"></h2>
+            <p class="single-beskrivelse"></p>
 
         </div>
         <button class="single-knap">X</button>
@@ -292,7 +297,9 @@ get_header();
             categories = await catdata.json();
             console.log(categories);
             visKreaprojekter();
+            console.log("Nu viser jeg kreaprojekter");
             opretKnapper();
+            console.log("Nu opretter jeg knapper");
         }
 
         // Funktion der opretter kategori knapper i html //
@@ -336,7 +343,7 @@ get_header();
                     klon.querySelector(".billede").src = kreaprojekt.billede.guid;
                     //klon.querySelector(".info_knap").addEventListener("click", () => { location.href = kreaprojekt.link;})
                     klon.querySelector(".info_knap").addEventListener("click", () => {
-                        visSingle();
+                        visSingle(kreaprojekt);
                     })
                     container.appendChild(klon);
                 }
@@ -344,29 +351,19 @@ get_header();
             })
         }
 
-        //Skal nok ikke bruges, men bliver brugt i single-kreaprojekt??
-
-        //let aktuelKreaprojekt = <?php echo get_the_ID() ?>;
-        //const dbUrl = "https://nicolinechristiansen.dk/kea/tantelola/wordpress/wp-json/wp/v2/kreaprojekt/" + aktuelKreaprojekt;
-        //async function getSingle() {
-        //const data = await fetch(dbUrl);
-        //kreaprojekt = await data.json();
-
-        //visSingle();
-        //}
-
         //Funktion der skal vise specifik info omkring et kreaprojekt
-        function visSingle() {
+        function visSingle(valgte) {
             mySingle.classList.remove("forsvind");
             mySingle.classList.add("vis");
             console.log("Jeg har tilføjet display block");
-            //mySingle.querySelector(".single-navn").textContent = kreaprojekt.title.rendered;
-            //mySingle.querySelector(".single-billede").src = kreaprojekt.billede.guid;
-            //mySingle.querySelector(".single-beskrivelse").innerHTML = kreaprojekt.beskrivelse;
-            //mySingle.querySelector(".single-pris").textContent = kreaprojekt.pris;
-            //console.log("Jeg viser single view");
-            mySingle.querySelector("#singleView button").addEventListener("click", lukSingle);
+            mySingle.querySelector(".single-knap").addEventListener("click", lukSingle);
             console.log("Jeg lukker single view");
+            //mySingle.querySelector("#single-content").
+            mySingle.querySelector(".single-navn").textContent = valgte.title.rendered;
+            mySingle.querySelector(".single-billede").src = valgte.billede.guid;
+            mySingle.querySelector(".single-beskrivelse").innerHTML = valgte.beskrivelse;
+            mySingle.querySelector(".single-pris").textContent = valgte.pris;
+            console.log("Jeg viser single view");
 
         }
 
