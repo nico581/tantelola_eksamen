@@ -3,32 +3,32 @@ get_header();
 ?>
 
 <style>
+    #primary {
+        height: auto;
+    }
+
     /* Toppen af dom */
     #top {
-        text-align: center;
-        height: 120px;
-        padding-top: 50px;
-        padding-bottom: 50px;
-    }
-
-    #top .regnbue {
-        position: absolute;
-        margin-top: -3.1rem;
-        left: 0rem;
-
-    }
-
-    #top .top_tekst {
+        display: flex;
+        width: 1225px;
+        justify-content: flex-start;
         margin: 0 auto;
-        padding: 1rem;
     }
 
-    #top .overskrift {
+
+    .top_tekst {
+        margin-bottom: 2rem;
+    }
+
+    .overskrift {
+        text-align: center;
+        margin-top: 2rem;
         font-size: 26px;
         font-weight: 700;
+        color: #FFB583;
     }
 
-    #top .paragraph {
+    .paragraph {
         font-weight: 400;
     }
 
@@ -36,12 +36,13 @@ get_header();
     #indhold_sidebar {
         display: flex;
         flex-direction: column;
-        margin-top: 15rem;
     }
 
     #indhold_sidebar .sitebar .tekst .underoverskrift {
         font-size: 18px;
-        /*color: #a46497;*/
+        color: #FFB583;
+        font-weight: 700;
+        text-align: center;
     }
 
     .sitebar {
@@ -51,27 +52,34 @@ get_header();
 
     }
 
-    #filtrering .filter {
-        /*display: block;*/
+    #filtrering {
         display: flex;
-        flex-direction: column;
-        align-items: center;
+        flex-direction: row;
+        justify-content: space-evenly;
+        margin-bottom: 5rem;
+        margin-top: 1rem;
+    }
+
+    #filtrering .filter {
         border: none;
-        background-color: transparent;
+        border-radius: 30px;
+        color: white;
+        /*background-color: transparent;*/
+        background-color: #a46497;
+        padding: 1rem;
         font-size: 16px;
-        font-weight: 500;
         margin-top: 1rem;
     }
 
     #filtrering .filter:hover {
         cursor: pointer;
-        color: #a46497;
+        /*color: #a46497;*/
         font-weight: 600;
 
     }
 
     #filtrering .filter:focus {
-        color: #a46497;
+        /*color: #a46497;*/
         font-weight: 600;
 
     }
@@ -80,22 +88,28 @@ get_header();
     /* Oversigten over projekter */
 
     #kreaprojekt-oversigt {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: flex-start;
         margin: 0 1rem;
         grid-gap: 2rem;
-        align-self: center;
     }
 
     #kreaprojekt-oversigt h3 {
-        font-size: 16px;
-        text-align: center;
+        font-size: 18px;
+        text-align: left;
     }
 
     .kreaprojekt {
-        background: rgb(255, 255, 255, 60);
-        border-bottom-right-radius: 20px;
-        border-bottom-left-radius: 20px;
+        flex-basis: 30%;
+        align-self: center;
+    }
+
+    .kreaprojekt img {
+        width: 250px;
+        height: 250px;
+        border-radius: 20px;
 
     }
 
@@ -106,42 +120,84 @@ get_header();
         padding-bottom: 1rem;
     }
 
-    .info_knap {
-        height: 2rem;
-        width: 5rem;
-        align-self: center;
-        background-color: #E0E8EE;
-        border: none;
+
+    /* Overlay */
+
+    .billede_og_overlay {
+        position: relative;
+    }
+
+    .overlay {
+        position: absolute;
+        width: 100%;
+        height: 97.9%;
+        background-color: rgb(255, 255, 255, 80%);
+        opacity: 0;
+        transition: .2s ease;
+        display: flex;
+        justify-content: space-around;
+        border: 0.5px solid lightgrey;
         border-radius: 20px;
-        box-shadow: rgba(0, 0, 0, 0.3) 0px 12px 18px -6px;
-
     }
 
-    .info_knap:hover {
+    .overlay:hover {
+        opacity: 1;
+    }
+
+    .overlay .overlay_knap {
+        align-self: center;
+        background-color: #a46497;
+        border: none;
+        border-radius: 30px;
+        width: 50px;
+        height: 50px;
+        font-size: 2rem;
+        color: white;
+    }
+
+
+    .overlay .overlay_knap:hover {
         cursor: pointer;
-        background-color: #F2E7FA;
     }
+
 
     /* Single view */
 
 
     #singleView {
         width: 100vw;
-        height: 100vh;
+        /*height: 100vh;*/
         position: fixed;
-        /*text-align: center;*/
+        z-index: 2;
     }
-
 
     #single-content {
         display: flex;
-        flex-direction: row;
-        width: 80vw;
+        flex-direction: column-reverse;
+        width: 70vw;
         background-color: rgb(255, 255, 255, 95%);
         margin: auto;
         border-radius: 20px;
         box-shadow: rgba(0 0 0 / 30%) -5px 20px 22px 0px;
     }
+
+    .single-billede {
+        display: none;
+    }
+
+    .single-navn {
+        font-size: 26px;
+        text-align: center;
+        font-weight: 700;
+        color: #FFB583;
+    }
+
+    .single-pris {
+        font-size: 18px;
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+
 
     #singleView.vis {
         display: block;
@@ -158,21 +214,29 @@ get_header();
 
     .single-billede {
         align-self: center;
-        max-width: 500px;
+    }
+
+    .single-beskrivelse {
+        font-size: 12px;
     }
 
     .kreaprojekt-infotekst {
+        padding: 2rem;
         align-self: center;
     }
 
     .single-knap {
-        height: 3rem;
-        width: 12rem;
+        /*align-self: flex-start;*/
+        align-self: center;
+
+        height: 40px;
+        width: 40px;
         margin-top: 1rem;
-        margin-right: 1rem;
+        margin-bottom: 1rem;
+        /*margin-left: 6.8rem;*/
         background-color: #E0E8EE;
         border: none;
-        border-radius: 20px;
+        border-radius: 30px;
         box-shadow: rgba(0, 0, 0, 0.3) 0px 12px 18px -6px;
     }
 
@@ -181,31 +245,187 @@ get_header();
         background-color: #F2E7FA;
     }
 
+    /* Baggrundsstroke */
+
+    .baggrunds_stroke {
+        position: fixed;
+        z-index: -100;
+        top: 12%;
+        left: -8%;
+        overflow: hidden;
+        width: 3000px;
+    }
+
+
     @media (min-width: 600px) {
-        #indhold_sidebar {
+
+        /* Kreaprojekt oversigt */
+        #kreaprojekt-oversigt {
             flex-direction: row;
-            margin-top: auto;
+            justify-content: center;
+            /*justify-content: flex-start;*/
+            /*flex-wrap: wrap;*/
+        }
+
+        .kreaprojekt img {
+            width: auto;
+            height: auto;
+            border-radius: 20px;
+
         }
 
         #primary {
-            margin-top: 10rem;
             margin-bottom: 5rem;
         }
 
-        #kreaprojekt-oversigt {
-            margin: 0 auto;
+        /* Sitebar */
+
+        .sitebar {
+            height: auto;
+            align-self: center;
+
+        }
+
+        /*.overskrift {
+            text-align: left;
+        }
+
+        #indhold_sidebar .sitebar .tekst .underoverskrift {
+
+            text-align: left;
+        }
+
+        #filtrering {
+            flex-direction: column;
+        }
+
+        #filtrering .filter {
+            background-color: transparent;
+            color: black;
+            padding: 0;
+            text-align: left;
+        }
+
+        #filtrering .filter:hover {
+
+            color: #a46497;
+
+
+        }
+
+        #filtrering .filter:focus {
+            color: #a46497;
+
+
+        }*/
+
+
+        /* Single view */
+
+        #single-content {
+            width: 80vw;
+        }
+
+    }
+
+    @media (min-width:1300px) {
+
+        /* Sidebar */
+        #indhold_sidebar {
+            flex-direction: row;
+            margin-top: 2rem;
+            justify-content: center;
+            padding-left: 8rem;
+            padding-right: 8rem;
         }
 
         .sitebar {
-            height: 16.5vw;
             align-self: flex-start;
+            height: 16.5vw;
             border-right: 0.5px solid lightgrey;
-            padding-left: 8.5rem;
             padding-right: 7rem;
+            margin-left: 3rem;
+            margin-right: 2rem;
+
         }
 
 
+        .overskrift {
+            text-align: left;
+        }
 
+        #indhold_sidebar .sitebar .tekst .underoverskrift {
+
+            text-align: left;
+        }
+
+        #filtrering {
+            flex-direction: column;
+        }
+
+        #filtrering .filter {
+            background-color: transparent;
+            color: black;
+            padding: 0;
+            text-align: left;
+        }
+
+        #filtrering .filter:hover {
+
+            color: #a46497;
+
+
+        }
+
+        #filtrering .filter:focus {
+            color: #a46497;
+
+
+        }
+
+        /* Kreaprojekt oversigt */
+        #kreaprojekt-oversigt {
+            justify-content: flex-start;
+            flex-wrap: wrap;
+        }
+
+        /* Single view */
+
+        #singleView {
+            top: 25%;
+        }
+
+        .single-billede {
+            display: block;
+        }
+
+        .single-navn {
+            text-align: left;
+
+        }
+
+        .single-pris {
+
+            text-align: left;
+
+        }
+
+        .single-beskrivelse {
+            font-size: 16px;
+        }
+
+        #single-content {
+            flex-direction: row;
+            width: 50vw;
+        }
+
+        .kreaprojekt-infotekst {
+            padding: 0;
+        }
+
+        .single-knap-container {
+            width: 8rem;
+        }
     }
 
 </style>
@@ -221,33 +441,32 @@ get_header();
             <p class="single-beskrivelse"></p>
 
         </div>
-        <button class="single-knap">X</button>
-    </div>
-</section>
-
-<section id="top">
-    <div class="regnbue_divider">
-        <img src="/kea/tantelola/wordpress/wp-content/themes/child/img/regnbue_streg.png" alt="regnbue_divider" class="regnbue">
-    </div>
-    <div class="top_tekst">
-        <h1 class="overskrift">Kreakatalog</h1>
-        <div class="paragraph">
-            <p> Mangler I en hyggelig familieaktivitet, eller får du børnebørnene på besøg i weekenden?</p>
-            <p>Så kan du her se vores udvalg af kreaprojekter, som du kan kreerer i caféen eller tage med hjem to-go.</p>
+        <div class="single-knap-container">
+            <button class="single-knap">X</button>
         </div>
     </div>
 </section>
 
+<section id="top">
+    <div class="baggrunds_stroke">
+        <img src="/kea/tantelola/wordpress/wp-content/themes/child/img/baggrundsstroke.png" alt="baggrundsstroke">
+    </div>
 
+</section>
 
 <section id="liste">
     <template>
         <article class="kreaprojekt">
-            <img src="" alt="" class="billede">
+            <div class="billede_og_overlay">
+                <div class="overlay">
+                    <button class="overlay_knap">+</button>
+                </div>
+                <img src="" alt="" class="billede">
+            </div>
             <div class="info">
                 <h3 class="navn">
                 </h3>
-                <button class="info_knap">Info</button>
+                <!--<button class="info_knap">Info</button>-->
                 <!--<p class="pris"></p>-->
             </div>
         </article>
@@ -259,6 +478,13 @@ get_header();
     <main id="main" class="site-main">
         <section id="indhold_sidebar">
             <div class="sitebar">
+                <div class="top_tekst">
+                    <h1 class="overskrift">Kreakatalog</h1>
+                    <div class="paragraph">
+                        <p> Mangler I en hyggelig familieaktivitet, eller får du børnebørnene på besøg i weekenden?</p>
+                        <p>Så kan du her se vores udvalg af kreaprojekter, som du kan kreerer i caféen eller tage med hjem to-go.</p>
+                    </div>
+                </div>
                 <div class="tekst">
                     <h2 class="underoverskrift">Prisklasse</h2>
                 </div>
@@ -273,9 +499,9 @@ get_header();
 </section>
 
 <section id="bund">
-    <div class="regnbue_divider">
+    <!--<div class="regnbue_divider">
         <img src="/kea/tantelola/wordpress/wp-content/themes/child/img/regnbue_streg.png" alt="regnbue_divider" class="regnbue">
-    </div>
+    </div>-->
     <script>
         //Variabler//
         let kreaprojekt;
@@ -327,6 +553,7 @@ get_header();
 
         }
 
+
         //Funktion som placere information fra pods i de respektive tags som er tilføjet til oversigten //
 
         function visKreaprojekter() {
@@ -342,7 +569,7 @@ get_header();
                     //klon.querySelector(".pris").textContent = kreaprojekt.pris;//
                     klon.querySelector(".billede").src = kreaprojekt.billede.guid;
                     //klon.querySelector(".info_knap").addEventListener("click", () => { location.href = kreaprojekt.link;})
-                    klon.querySelector(".info_knap").addEventListener("click", () => {
+                    klon.querySelector(".kreaprojekt").addEventListener("click", () => {
                         visSingle(kreaprojekt);
                     })
                     container.appendChild(klon);
@@ -355,22 +582,21 @@ get_header();
         function visSingle(valgte) {
             mySingle.classList.remove("forsvind");
             mySingle.classList.add("vis");
-            console.log("Jeg har tilføjet display block");
+            console.log("Nu kan du se mig");
             mySingle.querySelector(".single-knap").addEventListener("click", lukSingle);
-            console.log("Jeg lukker single view");
             //mySingle.querySelector("#single-content").
             mySingle.querySelector(".single-navn").textContent = valgte.title.rendered;
             mySingle.querySelector(".single-billede").src = valgte.billede.guid;
             mySingle.querySelector(".single-beskrivelse").innerHTML = valgte.beskrivelse;
             mySingle.querySelector(".single-pris").textContent = valgte.pris;
             console.log("Jeg viser single view");
-
         }
 
         //Funktion som lukker den specifikke info om kreaprojekt
         function lukSingle() {
             mySingle.classList.remove("vis");
             mySingle.classList.add("forsvind");
+            console.log("Jeg lukker single view");
 
         }
 
