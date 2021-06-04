@@ -5,6 +5,7 @@ get_header();
 <style>
     #primary {
         height: auto;
+        margin-bottom: 5rem;
     }
 
     /* Toppen af dom */
@@ -64,7 +65,6 @@ get_header();
         border: none;
         border-radius: 30px;
         color: white;
-        /*background-color: transparent;*/
         background-color: #a46497;
         padding: 1rem;
         font-size: 16px;
@@ -73,14 +73,15 @@ get_header();
 
     #filtrering .filter:hover {
         cursor: pointer;
-        /*color: #a46497;*/
         font-weight: 600;
+        transform: scale(1.08);
+        background-color: #E0E8EE;
 
     }
 
     #filtrering .filter:focus {
-        /*color: #a46497;*/
         font-weight: 600;
+        background-color: #E0E8EE;
 
     }
 
@@ -158,6 +159,7 @@ get_header();
 
     .overlay .overlay_knap:hover {
         cursor: pointer;
+        transform: scale(1.08);
     }
 
 
@@ -174,6 +176,7 @@ get_header();
     #single-content {
         display: flex;
         flex-direction: column-reverse;
+        align-items: center;
         width: 70vw;
         background-color: rgb(255, 255, 255, 95%);
         margin: auto;
@@ -274,10 +277,6 @@ get_header();
 
         }
 
-        #primary {
-            margin-bottom: 5rem;
-        }
-
         /* Sitebar */
 
         .sitebar {
@@ -285,39 +284,6 @@ get_header();
             align-self: center;
 
         }
-
-        /*.overskrift {
-            text-align: left;
-        }
-
-        #indhold_sidebar .sitebar .tekst .underoverskrift {
-
-            text-align: left;
-        }
-
-        #filtrering {
-            flex-direction: column;
-        }
-
-        #filtrering .filter {
-            background-color: transparent;
-            color: black;
-            padding: 0;
-            text-align: left;
-        }
-
-        #filtrering .filter:hover {
-
-            color: #a46497;
-
-
-        }
-
-        #filtrering .filter:focus {
-            color: #a46497;
-
-
-        }*/
 
 
         /* Single view */
@@ -341,7 +307,7 @@ get_header();
 
         .sitebar {
             align-self: flex-start;
-            height: 16.5vw;
+            height: 36.5vw;
             border-right: 0.5px solid lightgrey;
             padding-right: 7rem;
             margin-left: 3rem;
@@ -371,14 +337,15 @@ get_header();
         }
 
         #filtrering .filter:hover {
-
             color: #a46497;
+            background-color: transparent;
 
 
         }
 
         #filtrering .filter:focus {
             color: #a46497;
+            background-color: transparent;
 
 
         }
@@ -416,6 +383,7 @@ get_header();
 
         #single-content {
             flex-direction: row;
+            align-items: flex-start;
             width: 50vw;
         }
 
