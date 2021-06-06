@@ -77,14 +77,14 @@ get_header();
         font-weight: 600;
         transform: scale(1.08);
         color: #FFB583;
-        background-color: #E0E8EE;
+        background-color: #77b4a6;
 
     }
 
     #filtrering .filter:focus {
         font-weight: 600;
         color: #FFB583;
-        background-color: #E0E8EE;
+        background-color: #77b4a6;
 
     }
 
@@ -163,6 +163,8 @@ get_header();
     .overlay .overlay_knap:hover {
         cursor: pointer;
         transform: scale(1.08);
+        background-color: #77b4a6;
+        color: #ffcc99;
     }
 
 
@@ -240,15 +242,17 @@ get_header();
         margin-top: 1rem;
         margin-bottom: 1rem;
         /*margin-left: 6.8rem;*/
-        background-color: #E0E8EE;
+        background-color: #a46497;
         border: none;
         border-radius: 30px;
         box-shadow: rgba(0, 0, 0, 0.3) 0px 12px 18px -6px;
+        color: white;
     }
 
     .single-knap:hover {
         cursor: pointer;
-        background-color: #F2E7FA;
+        background-color: #77b4a6;
+        color: #FFB583;
     }
 
     /* Baggrundsstroke */

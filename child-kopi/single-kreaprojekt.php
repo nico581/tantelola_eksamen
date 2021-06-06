@@ -16,7 +16,7 @@ get_header();
 <style>
     #kreaprojekt {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         justify-content: center;
         margin: 5rem auto;
         gap: 2rem;
@@ -31,6 +31,7 @@ get_header();
         display: flex;
         flex-direction: column;
         align-self: center;
+        padding: 1rem;
     }
 
     .billede {
@@ -47,7 +48,7 @@ get_header();
         height: 2rem;
         width: 15rem;
         align-self: center;
-        background-color: #E0E8EE;
+        background-color: #77b4a6;
         border: none;
         border-radius: 20px;
     }
@@ -55,6 +56,28 @@ get_header();
     .knap button:hover {
         cursor: pointer;
         background-color: #F2E7FA;
+
+    }
+
+    @media (min-width: 600px) {
+        .kreaprojekt-billede {
+            display: flex;
+            flex-direction: row;
+            align-self: center;
+        }
+    }
+
+    @media (min-width:1300px) {
+
+        #main {
+            margin-top: 4rem;
+        }
+
+        #kreaprojekt {
+            flex-direction: row;
+        }
+
+
     }
 
 </style>
