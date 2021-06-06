@@ -59,11 +59,6 @@ get_header();
 
 </style>
 
-<section id="top">
-    <div class="regnbue_divider">
-        <img src="/kea/tantelola/wordpress/wp-content/themes/child/img/regnbue_streg.png" alt="regnbue_divider" class="regnbue">
-    </div>
-</section>
 <section id="primary" class="content-area">
     <main id="main" class="site-main">
         <article id="kreaprojekt">
@@ -122,11 +117,6 @@ get_header();
 
     </script>
 
-</section>
-<section id="bund">
-    <div class="regnbue_divider">
-        <img src="/kea/tantelola/wordpress/wp-content/themes/child/img/regnbue_streg.png" alt="regnbue_divider" class="regnbue">
-    </div>
 </section>
 
 <?php
