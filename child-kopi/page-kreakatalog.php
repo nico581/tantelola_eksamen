@@ -6,6 +6,7 @@ get_header();
     #primary {
         height: auto;
         margin-bottom: 5rem;
+        margin-top: 5rem;
     }
 
     /* Toppen af dom */
