@@ -559,7 +559,6 @@ get_header();
             mySingle.classList.add("vis");
             console.log("Nu kan du se mig");
             mySingle.querySelector(".single-knap").addEventListener("click", lukSingle);
-            //mySingle.querySelector("#single-content").
             mySingle.querySelector(".single-navn").textContent = valgte.title.rendered;
             mySingle.querySelector(".single-billede").src = valgte.billede.guid;
             mySingle.querySelector(".single-beskrivelse").innerHTML = valgte.beskrivelse;
